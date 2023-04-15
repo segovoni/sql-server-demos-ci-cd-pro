@@ -32,3 +32,14 @@ jobs:
 
       - name: Restore AdventureWorks
         run: docker exec -i $ENV_CONTAINER_ID /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "3uuiCaKxfbForrK" -Q "RESTORE DATABASE [AdventureWorks2017] FROM DISK = '/adventureworks.bak' WITH MOVE 'AdventureWorks2017' TO '/var/opt/mssql/data/AdventureWorks.mdf', MOVE 'AdventureWorks2017_log' TO '/var/opt/mssql/data/AdventureWorks_log.ldf'"
+
+      - uses: actions/checkout@v2
+
+      - name: Install tSQLt with SQL auth on AdventureWorks2017
+        uses: lowlydba/tsqlt-installer@v1
+        with:
+          sql-instance: localhost
+          database: AdventureWorks2017
+          version: latest
+          user: sa
+          password: 3uuiCaKxfbForrK
