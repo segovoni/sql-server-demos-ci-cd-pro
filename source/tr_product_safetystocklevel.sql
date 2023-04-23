@@ -16,14 +16,9 @@ BEGIN
   /* 
      Avoid to insert products with safety stock level lower than 10!
   */
-  DECLARE @SafetyStockLevel SMALLINT;
-
-  SELECT
-    @SafetyStockLevel = SafetyStockLevel
-  FROM
-    inserted;
-
-  IF (@SafetyStockLevel < 10)
+  
+  -- Testing all rows in the Inserted virtual table
+  IF EXISTS (SELECT ProductID FROM inserted WHERE (SafetyStockLevel < 10))
   BEGIN
     -- Error!!
     EXEC Production.usp_Raiserror_SafetyStockLevel
