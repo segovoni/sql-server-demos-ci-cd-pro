@@ -54,7 +54,7 @@ jobs:
 
 #---------- 4. Installation of the tSQLt framework
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install tSQLt with SQL auth on AdventureWorks2017
         uses: lowlydba/tsqlt-installer@v1
